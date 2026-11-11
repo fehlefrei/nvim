@@ -136,3 +136,10 @@ autocmd('PackChanged', {
     end
   end,
 })
+
+autocmd('ColorScheme', {
+  callback = function()
+    vim.g.terminal_color_8 = '#9aa5b1'
+  end,
+})
+vim.cmd.doautocmd 'ColorScheme'

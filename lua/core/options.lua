@@ -10,7 +10,18 @@ local function no_paste()
 end
 
 if vim.env.TMUX ~= nil then
-  vim.g.clipboard = 'tmux'
+  vim.g.clipboard = {
+    name = 'tmux (no OSC 52 read)',
+    copy = {
+      ['+'] = { 'tmux', 'load-buffer', '-w', '-' },
+      ['*'] = { 'tmux', 'load-buffer', '-w', '-' },
+    },
+    paste = {
+      ['+'] = { 'tmux', 'save-buffer', '-' },
+      ['*'] = { 'tmux', 'save-buffer', '-' },
+    },
+    cache_enabled = 0,
+  }
 else
   vim.g.clipboard = {
     name = 'OSC 52',
